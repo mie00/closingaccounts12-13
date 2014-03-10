@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>الحساب الختامي مصر 2012/2013</title>
+	<style>
+		canvas{
+			border :0px solid black;
+			text-align:center;
+			margin: auto;
+			width: 500px;
+			height: 500px;
+		}
+		#pop{
+			background-color: white;
+			border:1px solid gray;
+			padding:2px;
+			box-shadow:  0px 0px 3px 0px #7c07e4;
+			border-radius: 3px;
+			position: fixed;
+			top:-100;
+			left:-100;
+			direction: rtl;
+		}
+		#controls{
+			position: fixed;
+			right:0;
+			top:0;
+			margin:10px;
+			width:200px;
+		}
+		#controls *{
+			width: 100%;
+			margin:0;
+			padding:0;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="cancont">
+		<canvas id="mycan" width="500px" height="500px" onmousemove="info(event)" onmouseout="pop.hidden=1" onclick="click1(event)"></canvas>
+	</div>
+	<p id="pop"></p>
+	<div id="controls">
+		<button onclick="start(group['10000000'])">موارد</button><br>
+		<button onclick="start(group['20000000'])">إستخدامات</button><br>
+		<button onclick="if(basic.parent)start(basic.parent)">أعلي</button><br>
+		<button onclick="start(basic)">تغيير اللون</button><br>
+		<p id="root"></p>
+	</div>
+	<script src="app.js" type="text/javascript" charset="utf-8" async defer></script>
+</body>
+</html>
