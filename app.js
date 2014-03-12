@@ -55,9 +55,9 @@ function randColor(){
 	var l=Math.floor(Math.random()*16777215).toString(16)
 	return '#'+Array.apply(null,Array(6-l.length)).map(function(){return(0)}).join('')+l
 }
-function draw(th,start,sta,ena,st,rootstep){
+function draw(th,stava,sta,ena,st,rootstep){
 	var en;
-	if (start)
+	if (stava)
 		en=th.cont[0]/th.parent.cont[0]*(ena-sta)+st
 	else{
 		st=0
@@ -81,19 +81,23 @@ function draw(th,start,sta,ena,st,rootstep){
 function tree(th){
 	return '<li id="'+th.number+'">'+repr(th.cont[0])+' '+th.cont[4]+((th.children)?('<ul>'+th.children.map(tree).join('')+'</ul>'):'')+'</li>'
 }
-function start(th){
+function start(th,updateTree){
 	ctx.clearRect(0,0,2*center,2*center);
 	basic=th;
 	document.getElementById('root').innerHTML=repr(th.cont[0])+' '+th.cont[4]
 	Object.keys(group).forEach(function(x){if (group[x]!=null)group[x].shown=0})
 	draw(th);
-	$('#tree-cont').jstree(true).select_node(th.number);
+	if (!updateTree){
+		$('#tree-cont').jstree(true).deselect_all(true);
+		$('#tree-cont').jstree(true).select_node(th.number,true);
+	}
 }
 function init(){
 	document.getElementById('tree-cont').innerHTML='<ul>'+tree(group['10000000'])+tree(group['20000000'])+'</ul>';
 	$('#tree-cont')
 	  .on('changed.jstree', function (e, data) {
-	  	start(group[data.node.id]);
+	  	console.log(data)
+	  	start(group[data.node.id],1);
 	  })
 	  .jstree({
   		"core" : {
