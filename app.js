@@ -41,11 +41,6 @@ function step(number){
 	};
 }
 
-var rr=r.split('\n')
-for (var i = 0; i < rr.length; i++) {
-	var te=rr[i].split('\t')
-	group[te[te.length-1]]=new Thing(te[te.length-1],te)
-};
 function randColorhsl(){
 	//return '#'+Array.apply(null,Array(6)).map(function(){return Math.floor(Math.random()*16).toString(16)}).join('')
 	return 'hsl('+Math.floor(Math.random()*256)+','+
@@ -71,7 +66,7 @@ function draw(th,stava,sta,ena,st,rootstep){
 		th.en=en;
 		th.shown=1;
 
-		th.children.sort(function(x,y){return y.cont[0]-x.cont[0]})
+		
 		var chst=st;
 		for (var i = 0; i < th.children.length; i++) {
 			chst=draw(th.children[i],1,st,en,chst,rootstep)
@@ -93,10 +88,20 @@ function start(th,updateTree){
 	}
 }
 function init(){
+
+	var rr=r.split('\n')
+	for (var i = 0; i < rr.length; i++) {
+		var te=rr[i].split('\t')
+		group[te[te.length-1]]=new Thing(te[te.length-1],te)
+	};
+	gvals=Object.keys(group).map(function(k){return group[k]})
+	for (var i = 0; i < gvals.length; i++) {
+		if(gvals[i])
+			gvals[i].children.sort(function(x,y){return y.cont[0]-x.cont[0]});
+	};
 	document.getElementById('tree-cont').innerHTML='<ul>'+tree(group['10000000'])+tree(group['20000000'])+'</ul>';
 	$('#tree-cont')
 	  .on('changed.jstree', function (e, data) {
-	  	console.log(data)
 	  	start(group[data.node.id],1);
 	  })
 	  .jstree({
