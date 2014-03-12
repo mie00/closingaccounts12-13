@@ -35,9 +35,22 @@
 			padding:0;
 			text-align: center;
 		}
+		#tree{
+			position: fixed;
+			right: 210px;
+			top:0;
+			bottom:0;
+			left:510px;
+			height: 100%;
+		}
+		#tree-cont{
+			direction: rtl;
+			height: 100%;
+			overflow:scroll;
+		}
 	</style>
 </head>
-<body onload="start(group['20000000'])">
+<body onload="init()">
 	<div id="cancont">
 		<canvas id="mycan" width="500px" height="500px" onmousemove="info(event)" onmouseout="pop.hidden=1" onclick="click1(event)"></canvas>
 	</div>
@@ -51,5 +64,14 @@
 		<p id="root"></p>
 	</div>
 	<script src="app.js" type="text/javascript" charset="utf-8" async defer></script>
+	<div id="tree">
+		<link rel="stylesheet" href="third-party/jstree/themes/default/style.css" />
+		<script src="third-party/jquery-1.9.1.js"></script>
+		<script src="third-party/jstree/jstree.js"></script>
+		<div id="tree-cont">
+		</div>
+		<script>
+		</script>
+	</div>
 </body>
 </html>

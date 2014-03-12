@@ -16,9 +16,8 @@ function arc(sta,ena,str,enr,color){
 	ctx.fillStyle = color;
 	ctx.fill();
 }
-arc(PI/2,PI,10,20,'red')
 group={'00000000':null}
-basic=0;
+basic=null;
 Thing=function(number,cont){
 	this.number=number
 	this.cont=cont
@@ -78,7 +77,9 @@ function draw(th,start,sta,ena,st,rootstep){
 			chst=draw(th.children[i],1,st,en,chst,rootstep)
 		};
 	return en
-
+}
+function tree(th){
+	return '<li id="'+th.number+'">'+repr(th.cont[0])+' '+th.cont[4]+((th.children)?('<ul>'+th.children.map(tree).join('')+'</ul>'):'')+'</li>'
 }
 function start(th){
 	ctx.clearRect(0,0,2*center,2*center);
@@ -86,6 +87,20 @@ function start(th){
 	document.getElementById('root').innerHTML=repr(th.cont[0])+' '+th.cont[4]
 	Object.keys(group).forEach(function(x){if (group[x]!=null)group[x].shown=0})
 	draw(th);
+	$('#tree-cont').jstree(true).select_node(th.number);
+}
+function init(){
+	document.getElementById('tree-cont').innerHTML='<ul>'+tree(group['10000000'])+tree(group['20000000'])+'</ul>';
+	$('#tree-cont')
+	  .on('changed.jstree', function (e, data) {
+	  	start(group[data.node.id]);
+	  })
+	  .jstree({
+  		"core" : {
+	    	"multiple" : false
+	    }
+	});
+	start(group['20000000'])
 }
 function info(e){
 	var x=e.pageX*ratio-e.target.offsetLeft*ratio-center;
