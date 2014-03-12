@@ -551,7 +551,7 @@
 									this.close_node(e.currentTarget);
 								}
 								else {
-									o = this.get_prev_dom(e.currentTarget);
+									o = this.get_parent_dom(e.currentTarget);
 									if(o && o.length) { o.children('.jstree-anchor').focus(); }
 								}
 								break;
@@ -866,6 +866,17 @@
 				return obj;
 			}
 			tmp = obj[0].parentNode.parentNode;
+			return tmp && tmp.tagName === 'LI' ? $(tmp) : false;
+		},
+		/**
+		 * get the parent node of the `obj` node.
+		 * @name get_prev_dom(obj)
+		 * @param  {mixed} obj
+		 * @return {jQuery}
+		 */
+		get_parent_dom : function (obj) {
+			obj = this.get_node(obj, true);
+			var tmp = obj[0].parentNode.parentNode;
 			return tmp && tmp.tagName === 'LI' ? $(tmp) : false;
 		},
 		/**
