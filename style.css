@@ -1,5 +1,5 @@
 canvas{
-	border :0px solid black;
+	border :0 solid black;
 	text-align:center;
 	margin: auto;
 	width: 500px;
@@ -9,7 +9,7 @@ canvas{
 	background-color: white;
 	border:1px solid gray;
 	padding:2px;
-	box-shadow:  0px 0px 3px 0px #7c07e4;
+	box-shadow:  0 0 3px 0 #7c07e4;
 	border-radius: 3px;
 	position: fixed;
 	top:-100;
@@ -28,7 +28,7 @@ canvas{
 }
 #tree{
 	position: fixed;
-	right: 0px;
+	right: 0;
 	top:0;
 	bottom:0;
 	left:510px;
